@@ -15,8 +15,9 @@ import {
   SiGooglegemini,
   SiGithubcopilot,
   SiClaude,
+  SiOpenai,
 } from "react-icons/si";
-import { Database, Webhook } from "lucide-react";
+import { Database, Webhook, MousePointer2 } from "lucide-react";
 
 type IconType = ComponentType<{
   size?: number | string;
@@ -50,6 +51,8 @@ export const TECH: Record<string, TechIcon> = {
   Git: { Icon: SiGit, color: "#F05032" },
   Figma: { Icon: SiFigma, color: "#F24E1E" },
   "Claude Code": { Icon: SiClaude, color: "#D97757" },
+  Cursor: { Icon: MousePointer2 },
+  Codex: { Icon: SiOpenai },
   "GitHub Copilot": { Icon: SiGithubcopilot },
   "Gemini API": { Icon: SiGooglegemini, color: "#8E75B2" },
 };

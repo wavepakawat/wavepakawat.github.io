@@ -99,7 +99,7 @@ export const SKILLS: SkillGroup[] = [
   {
     key: "tools",
     title: { en: "Tools & Technologies", th: "เครื่องมือ & เทคโนโลยี" },
-    tags: ["Docker", "Git", "Figma", "Claude Code", "GitHub Copilot", "Gemini API"],
+    tags: ["Docker", "Git", "Figma", "Claude Code", "Cursor", "Codex", "GitHub Copilot", "Gemini API"],
   },
 ];
 
