@@ -51,6 +51,7 @@ export const UI = {
   skillsTitle: { en: "Skills & Tools", th: "ทักษะ & เครื่องมือ" },
   experienceTitle: { en: "Experience", th: "ประสบการณ์" },
   projectsTitle: { en: "Selected Projects", th: "ผลงานที่คัดสรร" },
+  workBuilt: { en: "What I built", th: "สิ่งที่ผมสร้าง" },
   educationTitle: { en: "Education", th: "การศึกษา" },
   contact: {
     title: { en: "Let's work together", th: "มาร่วมงานกัน" },
@@ -189,6 +190,7 @@ export type Project = {
   type: L;
   platform: string;
   year: string;
+  highlights: L[];
   tags: string[];
 };
 
@@ -200,9 +202,15 @@ export const PROJECTS: Project[] = [
     platform: "iOS · Android",
     year: "2022 — Now",
     desc: {
-      en: "Consumer & merchant gas-cylinder sales platform. Shopping cart, discounts, referrals, payment gateway, EDC/NFC card reading, and live order mapping.",
-      th: "แพลตฟอร์มจำหน่ายถังแก๊สทั้งฝั่งลูกค้าและร้านค้า ระบบตะกร้าสินค้า ส่วนลด เชิญเพื่อน ชำระเงิน อ่านบัตรผ่าน EDC/NFC และแสดงสถานะคำสั่งซื้อบนแผนที่",
+      en: "A two-sided gas-cylinder sales platform — a consumer storefront and a merchant point-of-sale, with native hardware integration.",
+      th: "แพลตฟอร์มจำหน่ายถังแก๊สสองฝั่ง — ฝั่งลูกค้าสำหรับสั่งซื้อ และฝั่งร้านค้าสำหรับขายหน้าร้าน พร้อมเชื่อมต่อฮาร์ดแวร์",
     },
+    highlights: [
+      { en: "Shopping cart, discount & referral systems", th: "ระบบตะกร้าสินค้า ส่วนลด และเชิญเพื่อน" },
+      { en: "In-app payment gateway", th: "ระบบชำระเงินในแอป" },
+      { en: "EDC terminal + NFC ID-card reading", th: "เชื่อมเครื่อง EDC อ่านบัตรประชาชนผ่าน NFC" },
+      { en: "Live order status on an interactive map", th: "ติดตามสถานะคำสั่งซื้อแบบเรียลไทม์บนแผนที่" },
+    ],
     tags: ["React Native", "C# .NET Core", "NFC / EDC", "Maps"],
   },
   {
@@ -212,9 +220,14 @@ export const PROJECTS: Project[] = [
     platform: "iOS · Android",
     year: "2021",
     desc: {
-      en: "iOS & Android clock-in/out with GPS location tracking and on-map verification for accuracy before submitting.",
-      th: "แอปลงเวลาเข้า-ออกงานบน iOS และ Android ระบุตำแหน่งด้วย GPS และยืนยันบนแผนที่เพื่อความแม่นยำก่อนส่งข้อมูล",
+      en: "A location-aware clock-in/out app for an HRM suite, built to stop buddy-punching with verified GPS positions.",
+      th: "แอปลงเวลาเข้า-ออกงานสำหรับระบบ HRM ที่ยืนยันตำแหน่งด้วย GPS เพื่อป้องกันการลงเวลาแทนกัน",
     },
+    highlights: [
+      { en: "GPS-tracked clock-in / clock-out", th: "ลงเวลาเข้า-ออกพร้อมระบุพิกัด GPS" },
+      { en: "On-map location verification before submit", th: "ยืนยันตำแหน่งบนแผนที่ก่อนส่งข้อมูล" },
+      { en: "Single codebase for iOS & Android", th: "โค้ดเบสเดียวรองรับทั้ง iOS และ Android" },
+    ],
     tags: ["React Native", "GPS", "Maps", "HRM"],
   },
   {
@@ -224,9 +237,14 @@ export const PROJECTS: Project[] = [
     platform: "iOS · Android",
     year: "2023",
     desc: {
-      en: "Royal Irrigation Department app visualizing water-level data through dynamic graphs and tables for fast, effective analysis.",
-      th: "แอปของกรมชลประทาน แสดงผลข้อมูลระดับน้ำในรูปแบบกราฟและตารางแบบไดนามิก เพื่อการวิเคราะห์ที่รวดเร็วและมีประสิทธิภาพ",
+      en: "A data app for the Royal Irrigation Department that turns raw water-level readings into fast, readable insight.",
+      th: "แอปข้อมูลของกรมชลประทาน ที่เปลี่ยนค่าระดับน้ำดิบให้อ่านและวิเคราะห์ได้อย่างรวดเร็ว",
     },
+    highlights: [
+      { en: "Dynamic charts & data tables", th: "กราฟและตารางข้อมูลแบบไดนามิก" },
+      { en: "Clear visual analysis of trends", th: "วิเคราะห์แนวโน้มผ่านภาพได้ชัดเจน" },
+      { en: "Built for non-technical field staff", th: "ออกแบบให้เจ้าหน้าที่ภาคสนามใช้ง่าย" },
+    ],
     tags: ["React Native", "Data Viz", "Charts"],
   },
   {
@@ -236,9 +254,15 @@ export const PROJECTS: Project[] = [
     platform: "Web",
     year: "2020 — Now",
     desc: {
-      en: "Enterprise resource & human-resource management with Next.js dashboards and an Employee Self-Service suite, backed by Golang & .NET APIs.",
-      th: "ระบบบริหารทรัพยากรองค์กรและบุคคล พร้อมแดชบอร์ด Next.js และชุดฟีเจอร์ Employee Self-Service รองรับด้วย API ที่พัฒนาด้วย Golang และ .NET",
+      en: "An end-to-end enterprise platform spanning resource planning, HR management, and employee self-service — frontend to API to database.",
+      th: "แพลตฟอร์มองค์กรครบวงจร ครอบคลุมการวางแผนทรัพยากร การจัดการบุคคล และ Employee Self-Service ตั้งแต่ฟรอนต์เอนด์ถึง API และฐานข้อมูล",
     },
+    highlights: [
+      { en: "Next.js admin & data dashboards", th: "แดชบอร์ดผู้ดูแลและข้อมูลด้วย Next.js" },
+      { en: "Employee Self-Service: leave, OT, shifts, payroll", th: "Employee Self-Service: ลา, OT, กะงาน, เงินเดือน" },
+      { en: "RESTful APIs in Golang & C# .NET Core", th: "RESTful API ด้วย Golang และ C# .NET Core" },
+      { en: "SQL Server data layer", th: "จัดการข้อมูลบน SQL Server" },
+    ],
     tags: ["Next.js", "Golang", "C# .NET Core", "SQL Server"],
   },
 ];

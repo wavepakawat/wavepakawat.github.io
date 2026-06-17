@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Fuel, MapPin, BarChart3, Building2, type LucideIcon } from "lucide-react";
+import { Fuel, MapPin, BarChart3, Building2, Check, type LucideIcon } from "lucide-react";
 import { useLang } from "../i18n";
 import { UI, PROJECTS, type Project } from "../data";
 import { gsap, prefersReduced } from "../lib/motion";
@@ -78,36 +78,49 @@ export function Work() {
           return (
             <article
               key={i}
-              className={`group relative flex shrink-0 flex-col overflow-hidden rounded-2xl border border-line bg-bg2 p-7 transition-colors hover:border-accent ${
-                horizontal ? "h-[64vh] w-[78vw] lg:w-[46vw]" : "w-full"
+              className={`flex shrink-0 flex-col gap-7 rounded-2xl border border-line bg-bg2 p-8 transition-colors hover:border-accent ${
+                horizontal ? "w-[80vw] lg:w-[48vw]" : "w-full"
               }`}
             >
-              {/* ghost index — fills the space a screenshot would, on purpose */}
-              <span
-                aria-hidden="true"
-                className="pointer-events-none absolute -right-4 -top-10 select-none font-display text-[12rem] font-bold leading-none text-line/60 sm:text-[16rem]"
-              >
-                {num}
-              </span>
-
-              {/* top: icon + category */}
-              <div className="relative flex items-center justify-between">
+              {/* header */}
+              <div className="flex items-center justify-between">
                 <span className="grid h-12 w-12 place-items-center rounded-xl border border-line text-accent">
                   <Icon size={24} strokeWidth={1.8} />
                 </span>
-                <span className="font-mono text-[0.7rem] uppercase tracking-[0.16em] text-muted">
-                  {tr(p.type)}
+                <span className="font-mono text-sm text-muted">
+                  {num} <span className="text-faint">/ 0{PROJECTS.length}</span>
                 </span>
               </div>
 
-              {/* bottom: title + description + metadata + stack */}
-              <div className="relative mt-auto pt-12">
-                <h3 className="text-[clamp(1.8rem,4vw,2.8rem)] font-bold leading-[0.98]">
+              {/* identity */}
+              <div>
+                <span className="font-mono text-[0.7rem] uppercase tracking-[0.16em] text-accent">
+                  {tr(p.type)}
+                </span>
+                <h3 className="mt-3 text-[clamp(1.8rem,3.6vw,2.6rem)] font-bold leading-[0.98]">
                   {tr(p.title)}
                 </h3>
-                <p className="mb-6 mt-4 max-w-md text-muted">{tr(p.desc)}</p>
+                <p className="mt-4 max-w-xl text-muted">{tr(p.desc)}</p>
+              </div>
 
-                <dl className="mb-6 grid grid-cols-2 gap-x-6 gap-y-3 border-t border-line pt-5 font-mono text-sm">
+              {/* what I built — fills the card with real substance */}
+              <div>
+                <span className="font-mono text-[0.7rem] uppercase tracking-[0.16em] text-faint">
+                  {tr(UI.workBuilt)}
+                </span>
+                <ul className="mt-4 grid gap-x-8 gap-y-3 sm:grid-cols-2">
+                  {p.highlights.map((h, j) => (
+                    <li key={j} className="flex items-start gap-2.5 text-[0.95rem]">
+                      <Check size={16} strokeWidth={2.4} className="mt-1 shrink-0 text-accent" />
+                      <span>{tr(h)}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* footer: metadata + stack */}
+              <div className="mt-auto flex flex-col gap-5 border-t border-line pt-6">
+                <dl className="grid grid-cols-2 gap-6 font-mono text-sm">
                   <div>
                     <dt className="text-[0.7rem] uppercase tracking-[0.14em] text-faint">Platform</dt>
                     <dd className="mt-0.5 text-ink">{p.platform}</dd>
@@ -117,7 +130,6 @@ export function Work() {
                     <dd className="mt-0.5 text-ink">{p.year}</dd>
                   </div>
                 </dl>
-
                 <Tags items={p.tags} />
               </div>
             </article>
