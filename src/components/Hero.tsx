@@ -12,12 +12,15 @@ export function Hero({ play }: { play: boolean }) {
       className="relative flex min-h-svh flex-col justify-between overflow-hidden px-5 pb-8 pt-28 text-white sm:px-8"
     >
       {/* full-bleed portrait */}
-      <img
-        src={`${import.meta.env.BASE_URL}assets/profile_full_background.jpg`}
-        alt=""
-        aria-hidden="true"
-        className="hero-img pointer-events-none absolute inset-0 -z-20 h-full w-full object-cover [object-position:68%_35%]"
-      />
+      <picture className="hero-img pointer-events-none absolute inset-0 -z-20 block h-full w-full">
+        <source srcSet={`${import.meta.env.BASE_URL}assets/profile_hero.webp`} type="image/webp" />
+        <img
+          src={`${import.meta.env.BASE_URL}assets/profile_hero.jpg`}
+          alt=""
+          aria-hidden="true"
+          className="h-full w-full object-cover [object-position:68%_35%]"
+        />
+      </picture>
       {/* legibility scrim: overall tint + gradients seating the type */}
       <div
         aria-hidden="true"
