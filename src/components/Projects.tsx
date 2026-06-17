@@ -1,4 +1,4 @@
-import { Fuel, MapPin, BarChart3, Building2, type LucideIcon } from "lucide-react";
+import { Fuel, MapPin, BarChart3, Building2, ArrowUpRight, type LucideIcon } from "lucide-react";
 import { useLang } from "../i18n";
 import { UI, PROJECTS, type Project } from "../data";
 import { Section } from "./Section";
@@ -16,20 +16,23 @@ export function Projects() {
 
   return (
     <Section id="projects" index="04" title={UI.projectsTitle}>
-      <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         {PROJECTS.map((p, i) => {
           const Icon = ICONS[p.icon];
           return (
             <article
               key={i}
-              style={{ borderTopColor: p.accent }}
-              className="rounded-[20px] border border-white/10 border-t-4 bg-white/5 px-6 py-6 transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_24px_50px_rgba(0,0,0,0.4)]"
+              className="group flex flex-col rounded-xl border border-border bg-bg p-6 transition-colors hover:border-accent"
             >
-              <span className="mb-3 inline-block" style={{ color: p.accent }}>
-                <Icon size={26} strokeWidth={2} />
-              </span>
-              <h3 className="mb-2 text-[1.25rem]">{tr(p.title)}</h3>
-              <p className="mb-4 text-[0.95rem] text-muted">{tr(p.desc)}</p>
+              <div className="mb-4 flex items-center justify-between text-accent">
+                <Icon size={22} strokeWidth={2} />
+                <ArrowUpRight
+                  size={18}
+                  className="text-faint transition-colors group-hover:text-accent"
+                />
+              </div>
+              <h3 className="text-lg font-semibold">{tr(p.title)}</h3>
+              <p className="mb-5 mt-2 flex-1 text-[0.95rem] text-muted">{tr(p.desc)}</p>
               <Tags items={p.tags} />
             </article>
           );

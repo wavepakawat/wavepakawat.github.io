@@ -8,18 +8,22 @@ export function Education() {
 
   return (
     <Section id="education" index="05" title={UI.educationTitle}>
-      <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+      <div className="flex flex-col">
         {EDUCATION.map((e, i) => (
           <article
             key={i}
-            className="rounded-[20px] border border-white/10 bg-white/5 p-6 transition-all duration-300 hover:-translate-y-1.5 hover:border-cyan"
+            className="grid gap-x-8 gap-y-2 border-t border-border py-8 sm:grid-cols-[140px_1fr]"
           >
-            <span className="mb-3 inline-grid h-10 w-10 place-items-center rounded-xl grad-cool text-white">
-              <GraduationCap size={22} strokeWidth={2} />
-            </span>
-            <span className="block font-mono text-[0.82rem] text-cyan">{e.period}</span>
-            <h3 className="mb-1 mt-1.5 text-[1.2rem]">{tr(e.degree)}</h3>
-            <p className="text-muted">{tr(e.school)}</p>
+            <div className="font-mono text-sm text-muted">{e.period}</div>
+            <div className="flex items-start gap-3">
+              <span className="mt-0.5 text-accent">
+                <GraduationCap size={20} strokeWidth={2} />
+              </span>
+              <div>
+                <h3 className="text-lg font-semibold">{tr(e.degree)}</h3>
+                <p className="mt-0.5 text-muted">{tr(e.school)}</p>
+              </div>
+            </div>
           </article>
         ))}
       </div>

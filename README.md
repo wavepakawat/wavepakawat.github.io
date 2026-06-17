@@ -5,7 +5,8 @@ Personal portfolio / résumé site for **Pakawat Maleephet** — Mobile & Fullst
 🔗 **Live:** https://wavepakawat.github.io
 
 Built with **React 19 + TypeScript + Vite + Tailwind CSS v4**, icons from **lucide-react**.
-Bilingual **EN / TH** toggle, creative animated design, downloadable résumé.
+Minimal editorial design with a **light / dark theme toggle** (defaults to system),
+a bilingual **EN / TH** toggle, and a downloadable résumé.
 
 ## 🧰 Stack
 

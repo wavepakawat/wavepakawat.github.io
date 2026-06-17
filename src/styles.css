@@ -1,80 +1,79 @@
 @import "tailwindcss";
 
-/* ============================================================
-   Design tokens — exposed to Tailwind as utilities
-   (e.g. bg-bg, text-muted, font-display, animate-float)
-   ============================================================ */
-@theme {
-  --color-bg: #0e0a1f;
-  --color-bgsoft: #15102e;
-  --color-ink: #f4f2ff;
-  --color-muted: #cbc6e6;
-  --color-faint: #9c95bf;
+/* Manual dark mode via a `.dark` class on <html> (toggled by ThemeProvider). */
+@custom-variant dark (&:where(.dark, .dark *));
 
-  --color-purple: #8b5cf6;
-  --color-pink: #ff5eae;
-  --color-blue: #3b82f6;
-  --color-cyan: #22d3ee;
-  --color-orange: #ff9d4d;
-  --color-lime: #a3e635;
+/* ============================================================
+   Theme tokens — light (default) and dark.
+   Exposed to Tailwind as utilities via @theme inline below
+   (e.g. bg-bg, text-ink, text-muted, border-border, text-accent).
+   ============================================================ */
+:root {
+  --bg: #ffffff;
+  --surface: #fafafa;
+  --elevated: #ffffff;
+  --ink: #18181b;
+  --muted: #52525b;
+  --faint: #a1a1aa;
+  --border: #e7e7ea;
+  --accent: #4f46e5;
+  --accent-ink: #ffffff;
+  --accent-soft: #eef2ff;
+}
+
+.dark {
+  --bg: #09090b;
+  --surface: #111113;
+  --elevated: #161618;
+  --ink: #fafafa;
+  --muted: #a1a1aa;
+  --faint: #71717a;
+  --border: #262629;
+  --accent: #818cf8;
+  --accent-ink: #0b0b12;
+  --accent-soft: #1c1b33;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-elevated: var(--elevated);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-faint: var(--faint);
+  --color-border: var(--border);
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
+  --color-accent-soft: var(--accent-soft);
 
   --font-sans: "Inter", "Noto Sans Thai", system-ui, sans-serif;
   --font-display: "Sora", "Inter", system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
-
-  --animate-float: float 22s ease-in-out infinite;
-  --animate-ringspin: ringspin 8s linear infinite;
-  --animate-scrolldot: scrolldot 1.6s ease-in-out infinite;
-
-  --radius-xl2: 20px;
 }
 
-@keyframes float {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  33%      { transform: translate(4vw, 3vh) scale(1.1); }
-  66%      { transform: translate(-3vw, -2vh) scale(0.95); }
-}
-@keyframes ringspin { to { filter: hue-rotate(360deg); } }
-@keyframes scrolldot {
-  0%   { opacity: 0; transform: translate(-50%, 0); }
-  40%  { opacity: 1; }
-  80%  { opacity: 0; transform: translate(-50%, 14px); }
-  100% { opacity: 0; }
-}
-
-/* ---- Reusable gradient utilities (composable with bg-clip-text etc.) ---- */
-@utility grad-main {
-  background-image: linear-gradient(120deg, #8b5cf6 0%, #ff5eae 50%, #ff9d4d 100%);
-}
-@utility grad-cool {
-  background-image: linear-gradient(120deg, #22d3ee 0%, #3b82f6 50%, #8b5cf6 100%);
-}
-
-/* ============================================================
-   Base
-   ============================================================ */
 @layer base {
   html {
     scroll-behavior: smooth;
-    scroll-padding-top: 90px;
+    scroll-padding-top: 88px;
   }
   body {
-    background: var(--color-bg);
-    color: var(--color-ink);
+    background: var(--bg);
+    color: var(--ink);
     font-family: var(--font-sans);
     font-size: 17px;
     line-height: 1.7;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
     overflow-x: hidden;
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
   h1, h2, h3 {
     font-family: var(--font-display);
-    line-height: 1.1;
-    letter-spacing: -0.02em;
+    line-height: 1.12;
+    letter-spacing: -0.025em;
   }
 
-  /* Thai needs more breathing room and no negative tracking */
+  /* Thai: more line height, neutral tracking */
   html[lang="th"] body {
     font-family: "Noto Sans Thai", "Inter", system-ui, sans-serif;
     line-height: 1.95;
@@ -85,7 +84,7 @@
   html[lang="th"] h3 {
     font-family: "Noto Sans Thai", "Sora", system-ui, sans-serif;
     letter-spacing: 0;
-    line-height: 1.3;
+    line-height: 1.32;
   }
 
   @media (prefers-reduced-motion: reduce) {

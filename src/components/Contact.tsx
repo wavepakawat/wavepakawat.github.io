@@ -22,11 +22,9 @@ export function Contact() {
   const { tr } = useLang();
 
   return (
-    <Section id="contact" index="06" title={UI.contact.title} center>
-      <p className="mx-auto mb-10 max-w-[50ch] text-center text-[1.1rem] text-muted">
-        {tr(UI.contact.lead)}
-      </p>
-      <div className="mx-auto grid max-w-3xl grid-cols-2 gap-4 sm:grid-cols-4">
+    <Section id="contact" index="06" title={UI.contact.title}>
+      <p className="max-w-2xl text-lg text-muted">{tr(UI.contact.lead)}</p>
+      <div className="mt-8 grid grid-cols-1 gap-3 sm:grid-cols-2">
         {CARDS.map((c) => {
           const Icon = c.icon;
           return (
@@ -34,19 +32,21 @@ export function Contact() {
               key={c.label}
               href={c.href}
               {...(c.external ? { target: "_blank", rel: "noopener" } : {})}
-              className="flex flex-col items-center gap-1.5 rounded-[20px] border border-white/10 bg-white/5 px-4 py-6 text-center transition-all duration-300 hover:-translate-y-1.5 hover:border-pink hover:bg-pink/5"
+              className="group flex items-center gap-4 rounded-xl border border-border p-4 transition-colors hover:border-accent"
             >
-              <span className="grid h-11 w-11 place-items-center rounded-xl grad-cool text-white">
-                <Icon size={22} strokeWidth={2} />
+              <span className="grid h-10 w-10 shrink-0 place-items-center rounded-lg border border-border text-accent transition-colors group-hover:border-accent">
+                <Icon size={19} strokeWidth={2} />
               </span>
-              <span className="text-[0.75rem] uppercase tracking-wide text-faint">{c.label}</span>
-              <span className="break-words text-[0.92rem] font-semibold">{c.value}</span>
+              <span className="min-w-0">
+                <span className="block text-xs uppercase tracking-wide text-faint">{c.label}</span>
+                <span className="block truncate font-medium">{c.value}</span>
+              </span>
             </a>
           );
         })}
       </div>
-      <p className="mt-8 flex items-center justify-center gap-2 text-muted">
-        <MapPin size={16} strokeWidth={2.2} />
+      <p className="mt-8 flex items-center gap-2 text-muted">
+        <MapPin size={16} strokeWidth={2.2} className="text-accent" />
         {tr(UI.contact.location)}
       </p>
     </Section>

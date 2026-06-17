@@ -1,5 +1,5 @@
+import { ThemeProvider } from "./theme";
 import { LangProvider } from "./i18n";
-import { Background } from "./components/Background";
 import { Nav } from "./components/Nav";
 import { Hero } from "./components/Hero";
 import { About } from "./components/About";
@@ -12,19 +12,20 @@ import { Footer } from "./components/Footer";
 
 export default function App() {
   return (
-    <LangProvider>
-      <Background />
-      <Nav />
-      <main>
-        <Hero />
-        <About />
-        <Skills />
-        <Experience />
-        <Projects />
-        <Education />
-        <Contact />
-      </main>
-      <Footer />
-    </LangProvider>
+    <ThemeProvider>
+      <LangProvider>
+        <Nav />
+        <main>
+          <Hero />
+          <About />
+          <Skills />
+          <Experience />
+          <Projects />
+          <Education />
+          <Contact />
+        </main>
+        <Footer />
+      </LangProvider>
+    </ThemeProvider>
   );
 }
