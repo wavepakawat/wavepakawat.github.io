@@ -3,7 +3,6 @@ import { ThemeProvider } from "./theme";
 import { LangProvider } from "./i18n";
 import { useSmoothScroll } from "./lib/motion";
 import { Loader } from "./components/Loader";
-import { Cursor } from "./components/Cursor";
 import { Nav } from "./components/Nav";
 import { Hero } from "./components/Hero";
 import { Marquee } from "./components/Marquee";
@@ -21,7 +20,6 @@ export default function App() {
     <ThemeProvider>
       <LangProvider>
         <Loader onDone={() => setReady(true)} />
-        <Cursor />
         <Nav />
         <main>
           <Hero play={ready} />

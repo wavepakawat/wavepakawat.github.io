@@ -11,7 +11,7 @@ export const PROFILE = {
   email: "wave51040@hotmail.com",
   phone: "098-870-7965",
   phoneHref: "+66988707965",
-  linkedin: "https://www.linkedin.com/in/pakawat-maleephet",
+  linkedin: "https://www.linkedin.com/in/pakawat-maleephet-582bb63a5",
   github: "https://github.com/wavepakawat",
   resume: "/Pakawat-Maleephet-Resume.pdf",
 };
