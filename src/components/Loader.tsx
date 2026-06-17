@@ -1,11 +1,27 @@
 import { useEffect, useRef, useState } from "react";
 import { gsap, prefersReduced } from "../lib/motion";
 
+const HERO_SRC = `${import.meta.env.BASE_URL}assets/profile_hero.webp`;
+
+// Module-level guard: the intro plays exactly once, even though React
+// StrictMode mounts effects twice in development.
+let hasPlayed = false;
+
+/** Decode an image up front so it can't pop in after the curtain lifts. */
+function preload(src: string): Promise<void> {
+  return new Promise((resolve) => {
+    const img = new Image();
+    const done = () => resolve();
+    img.onload = () => (img.decode ? img.decode().then(done, done) : done());
+    img.onerror = done;
+    img.src = src;
+  });
+}
+
 /**
- * Intro counter (00 → 100) then a curtain wipe.
- * - onReady fires immediately so the app warms up (Lenis, ScrollTrigger)
- *   behind the still-covered loader, keeping that work off the curtain frame.
- * - onReveal fires as the curtain lifts, timing the hero reveal to the wipe.
+ * Single intro: count 00 → 100 while the app warms behind the cover, then a
+ * curtain wipe that lifts only once the hero image and fonts are ready — so
+ * the reveal is one continuous motion with no second "loading" stage.
  */
 export function Loader({
   onReady,
@@ -18,47 +34,63 @@ export function Loader({
   const [count, setCount] = useState(0);
 
   useEffect(() => {
+    const hide = () => {
+      const el = root.current;
+      if (el) el.style.display = "none";
+    };
+
+    // Second StrictMode mount (or already finished): the first run owns the
+    // intro — just make sure the app is unblocked and the cover is gone.
+    if (hasPlayed) {
+      onReady();
+      onReveal();
+      hide();
+      return;
+    }
+    hasPlayed = true;
+
     if (prefersReduced()) {
       onReady();
       onReveal();
-      const el = root.current;
-      if (el) el.style.display = "none";
+      hide();
       return;
     }
 
-    // Warm the app now, while the loader still fully covers the screen,
-    // so Lenis/ScrollTrigger setup never competes with the curtain wipe.
+    // Warm Lenis/ScrollTrigger now, while the cover is still up.
     onReady();
 
     const obj = { v: 0 };
-    const tl = gsap.timeline();
-
-    tl.to(obj, {
+    gsap.to(obj, {
       v: 100,
-      duration: 1.2,
+      duration: 1.1,
       ease: "power2.out",
       onUpdate: () => setCount(Math.round(obj.v)),
     });
-    tl.to(".loader__bar", { scaleX: 1, duration: 1.2, ease: "power2.out" }, 0);
-    tl.to(
-      root.current,
-      {
+    gsap.to(".loader__bar", { scaleX: 1, duration: 1.1, ease: "power2.out" });
+
+    // Lift the curtain once the count has visibly finished AND the hero is
+    // truly ready — but never hang waiting on a slow font/network.
+    const assets = Promise.race([
+      Promise.all([
+        preload(HERO_SRC),
+        document.fonts ? document.fonts.ready : Promise.resolve(),
+      ]),
+      new Promise((r) => setTimeout(r, 2500)),
+    ]);
+    const minShown = new Promise((r) => setTimeout(r, 1150));
+
+    Promise.all([assets, minShown]).then(() => {
+      onReveal();
+      gsap.to(root.current, {
         yPercent: -100,
         duration: 0.75,
         ease: "power4.inOut",
-        onStart: onReveal,
-        onComplete: () => {
-          const el = root.current;
-          if (el) el.style.display = "none";
-        },
-      },
-      ">+0.05",
-    );
-
-    return () => {
-      tl.kill();
-    };
-  }, [onReady, onReveal]);
+        onComplete: hide,
+      });
+    });
+    // Intentionally no cleanup: the intro is fire-once and plays to completion.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div
