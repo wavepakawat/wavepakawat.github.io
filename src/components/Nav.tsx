@@ -31,8 +31,15 @@ export function Nav() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const pill =
-    "grid h-9 w-9 place-items-center rounded-full border border-current/25 text-current transition-colors hover:border-accent hover:text-accent";
+  const overHero = !scrolled;
+  // Over the photo, give the controls a glass backdrop so the text stays
+  // legible; the accent active-state only reads on the solid scrolled bar.
+  const ctrl = overHero
+    ? "border-white/40 bg-black/25 backdrop-blur-sm"
+    : "border-current/25";
+  const langActive = overHero ? "text-white" : "text-accent";
+  const langIdle = overHero ? "text-white/45" : "text-muted";
+  const pill = `grid h-9 w-9 place-items-center rounded-full border text-current transition-colors hover:border-accent hover:text-accent ${ctrl}`;
 
   return (
     <header
@@ -69,12 +76,12 @@ export function Nav() {
             type="button"
             onClick={toggleLang}
             aria-label="Switch language"
-            className="flex h-9 items-center gap-1.5 rounded-full border border-current/25 px-3 font-mono text-xs font-semibold text-current transition-colors hover:border-accent"
+            className={`flex h-9 items-center gap-1.5 rounded-full border px-3 font-mono text-xs font-semibold text-current transition-colors hover:border-accent ${ctrl}`}
           >
             <Languages size={14} strokeWidth={2.2} />
-            <span className={lang === "en" ? "text-accent" : ""}>EN</span>
+            <span className={lang === "en" ? langActive : langIdle}>EN</span>
             <span className="opacity-40">/</span>
-            <span className={lang === "th" ? "text-accent" : ""}>TH</span>
+            <span className={lang === "th" ? langActive : langIdle}>TH</span>
           </button>
           <button
             type="button"

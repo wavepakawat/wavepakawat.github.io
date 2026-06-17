@@ -35,11 +35,27 @@ export function useSmoothScroll(start: boolean) {
     gsap.ticker.add(ticker);
     gsap.ticker.lagSmoothing(0);
 
+    // Smooth-scroll in-page anchors through Lenis instead of jumping.
+    const onClick = (e: MouseEvent) => {
+      if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey) return;
+      const a = (e.target as HTMLElement | null)?.closest<HTMLAnchorElement>(
+        'a[href^="#"]',
+      );
+      const hash = a?.getAttribute("href");
+      if (!hash || hash === "#") return;
+      const el = document.querySelector(hash);
+      if (!el) return;
+      e.preventDefault();
+      lenis.scrollTo(el as HTMLElement, { offset: -80, duration: 1.2 });
+    };
+    document.addEventListener("click", onClick);
+
     // recalc once fonts/layout settle
     const t = window.setTimeout(() => ScrollTrigger.refresh(), 300);
 
     return () => {
       window.clearTimeout(t);
+      document.removeEventListener("click", onClick);
       gsap.ticker.remove(ticker);
       lenis.destroy();
       lenisRef.current = null;
