@@ -19,13 +19,22 @@ export function Experience() {
     }
 
     const ctx = gsap.context(() => {
-      // Accent rail fills as the section scrolls through the viewport.
+      // Accent rail fills as the section scrolls through the viewport, and
+      // holds — it only ever grows, never retracts on scroll-up.
       if (progress.current) {
-        gsap.set(progress.current, { transformOrigin: "top center", scaleY: 0 });
-        gsap.to(progress.current, {
-          scaleY: 1,
-          ease: "none",
-          scrollTrigger: { trigger: el, start: "top 62%", end: "bottom 78%", scrub: true },
+        const bar = progress.current;
+        gsap.set(bar, { transformOrigin: "top center", scaleY: 0 });
+        let max = 0;
+        ScrollTrigger.create({
+          trigger: el,
+          start: "top 62%",
+          end: "bottom 78%",
+          onUpdate: (self) => {
+            if (self.progress > max) {
+              max = self.progress;
+              gsap.set(bar, { scaleY: max });
+            }
+          },
         });
       }
 
