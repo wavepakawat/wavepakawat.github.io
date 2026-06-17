@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>วิธี Deploy ขึ้น GitHub User Page — wavepakawat.github.io</title>
+<style>
+  :root{
+    --bg:#0a0a0b; --bg2:#141417; --line:#26262c; --ink:#f3f3ef;
+    --muted:#a0a09a; --accent:#4b63ff; --ok:#2ecc71; --warn:#e7b34a;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:-apple-system,"Segoe UI","Noto Sans Thai",sans-serif;
+    line-height:1.8; -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:780px; margin:0 auto; padding:56px 22px 96px}
+  .eyebrow{font-family:ui-monospace,monospace; font-size:12px; letter-spacing:.18em;
+    text-transform:uppercase; color:var(--accent)}
+  h1{font-size:clamp(1.8rem,5vw,2.6rem); line-height:1.15; margin:.4em 0 .2em}
+  h2{font-size:1.35rem; margin:2.4em 0 .2em; display:flex; align-items:center; gap:.55em}
+  .num{display:grid; place-items:center; width:1.7em; height:1.7em; flex:0 0 auto;
+    border-radius:999px; background:var(--accent); color:#fff; font-size:.85rem; font-weight:700}
+  p{color:var(--ink)} .muted{color:var(--muted)}
+  a{color:var(--accent)}
+  code{font-family:ui-monospace,monospace; background:#1d1d22; padding:.12em .4em;
+    border-radius:6px; font-size:.92em}
+  pre{background:var(--bg2); border:1px solid var(--line); border-radius:12px;
+    padding:16px 18px; overflow:auto; margin:.8em 0}
+  pre code{background:none; padding:0; color:#e8e8ff; white-space:pre}
+  .step{border-left:2px solid var(--line); padding-left:24px; margin-left:11px}
+  .card{background:var(--bg2); border:1px solid var(--line); border-radius:14px;
+    padding:18px 20px; margin:1em 0}
+  .note{border-left:3px solid var(--warn)} .note strong{color:var(--warn)}
+  .ok{border-left:3px solid var(--ok)} .ok strong{color:var(--ok)}
+  ul{padding-left:1.2em} li{margin:.3em 0}
+  kbd{background:#26262c; border:1px solid #3a3a42; border-bottom-width:2px;
+    border-radius:6px; padding:.1em .5em; font-family:ui-monospace,monospace; font-size:.85em}
+  .url{font-weight:700}
+  hr{border:none; border-top:1px solid var(--line); margin:2.6em 0}
+  footer{color:var(--muted); font-size:.85rem; margin-top:3em}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <span class="eyebrow">Deployment Guide</span>
+  <h1>เอาเว็บขึ้น GitHub User Page</h1>
+  <p class="muted">
+    Repo: <code>wavepakawat.github.io</code> · เว็บจะอยู่ที่
+    <span class="url">https://wavepakawat.github.io</span>
+  </p>
+
+  <div class="card ok">
+    <strong>ข่าวดี:</strong> โปรเจกต์ตั้งค่าไว้ครบแล้ว — มี GitHub Actions
+    workflow ที่ <em>deploy ให้อัตโนมัติทุกครั้งที่ push ขึ้น <code>main</code></em>,
+    ตั้ง <code>base: "/"</code> ถูกต้องสำหรับ user page, และ remote ก็ผูกไว้แล้ว
+    เหลือแค่ 3 ขั้นตอนหลักด้านล่าง
+  </div>
+
+  <h2><span class="num">1</span> เช็กว่ามี repo บน GitHub แล้ว</h2>
+  <div class="step">
+    <p>ต้องมี repository ชื่อ <code>wavepakawat.github.io</code> (ชื่อต้องตรงเป๊ะกับ
+      username ของคุณ) และตั้งเป็น <strong>Public</strong></p>
+    <ul>
+      <li>ถ้ายังไม่มี: ไปที่ <a href="https://github.com/new" target="_blank">github.com/new</a>
+        → ตั้งชื่อ <code>wavepakawat.github.io</code> → เลือก Public → กด Create
+        (<em>ไม่ต้อง</em> ติ๊ก add README)</li>
+      <li>ถ้ามีแล้ว ข้ามไปขั้นตอนที่ 2 ได้เลย</li>
+    </ul>
+  </div>
+
+  <h2><span class="num">2</span> Push โค้ดขึ้น GitHub</h2>
+  <div class="step">
+    <p>เปิด Terminal ที่โฟลเดอร์โปรเจกต์ แล้วรันทีละบรรทัด:</p>
+    <pre><code>git add -A
+git commit -m "Deploy portfolio"
+git push -u origin main</code></pre>
+    <p class="muted">นี่เป็นการ push ครั้งแรก จึงใส่ <code>-u origin main</code>
+      ครั้งต่อ ๆ ไปแค่ <code>git push</code> ก็พอ</p>
+    <div class="card note">
+      <strong>ถ้า push ไม่ผ่าน</strong> เพราะถาม login: ใช้ Personal Access Token
+      แทนรหัสผ่าน — สร้างที่
+      <a href="https://github.com/settings/tokens" target="_blank">Settings → Developer settings → Tokens</a>
+      (เลือกสิทธิ์ <code>repo</code>) แล้วเอา token มาวางตอนถาม password
+    </div>
+  </div>
+
+  <h2><span class="num">3</span> เปิด GitHub Pages (ครั้งเดียว)</h2>
+  <div class="step">
+    <p>เข้าไปที่ repo บนเว็บ GitHub แล้ว:</p>
+    <ul>
+      <li>กดแท็บ <kbd>Settings</kbd></li>
+      <li>เมนูซ้ายเลือก <kbd>Pages</kbd></li>
+      <li>หัวข้อ <strong>Build and deployment</strong> → ช่อง <strong>Source</strong>
+        เลือกเป็น <kbd>GitHub Actions</kbd> (<em>ไม่ใช่</em> "Deploy from a branch")</li>
+    </ul>
+    <p class="muted">ตั้งค่านี้ครั้งเดียวพอ ไม่ต้องทำซ้ำอีก</p>
+  </div>
+
+  <h2><span class="num">4</span> รอ build เสร็จ แล้วเปิดเว็บ</h2>
+  <div class="step">
+    <ul>
+      <li>ไปที่แท็บ <kbd>Actions</kbd> ของ repo จะเห็น workflow
+        "Deploy to GitHub Pages" กำลังรัน</li>
+      <li>รอจนขึ้นเครื่องหมายถูกสีเขียว (ปกติ 1–2 นาที)</li>
+      <li>เปิด <span class="url">https://wavepakawat.github.io</span> 🎉</li>
+    </ul>
+    <p class="muted">ครั้งแรกอาจขึ้น 404 อยู่ครู่หนึ่ง รออีก 1–2 นาทีแล้ว refresh</p>
+  </div>
+
+  <hr />
+
+  <h2 style="font-size:1.15rem">อัปเดตเว็บครั้งต่อไป</h2>
+  <p>แก้โค้ดเสร็จ แค่ push เข้า <code>main</code> — Actions จะ build &amp; deploy ให้เอง:</p>
+  <pre><code>git add -A
+git commit -m "Update content"
+git push</code></pre>
+
+  <h2 style="font-size:1.15rem">แก้ปัญหาที่เจอบ่อย</h2>
+  <ul>
+    <li><strong>เปิดแล้วเป็นหน้า 404 / README:</strong> ไปเช็ก Settings → Pages
+      ว่า Source = <kbd>GitHub Actions</kbd> และดูแท็บ Actions ว่ารันเขียวแล้ว</li>
+    <li><strong>เว็บโชว์แต่หน้าขาว / ไฟล์ CSS-JS โหลดไม่ขึ้น:</strong> เกิดจาก base path
+      — โปรเจกต์นี้ตั้ง <code>base: "/"</code> ไว้ถูกแล้วสำหรับ user page ไม่ต้องแก้</li>
+    <li><strong>Actions ขึ้นแดง (build fail):</strong> กดเข้าไปอ่าน log บรรทัดสีแดง
+      มักเป็น error ตอน <code>bun run build</code> — แก้ที่เครื่องให้
+      <code>bun run build</code> ผ่านก่อนแล้วค่อย push ใหม่</li>
+    <li><strong>repo เป็น Private:</strong> GitHub Pages ฟรีต้องเป็น Public
+      (Settings → General → ล่างสุด เปลี่ยนเป็น Public)</li>
+  </ul>
+
+  <footer>
+    สร้างโดย Claude Code · ไฟล์นี้เป็นแค่คู่มือ ไม่ถูกนำขึ้นเว็บ (อยู่นอกโฟลเดอร์ build)
+  </footer>
+
+</div>
+</body>
+</html>
