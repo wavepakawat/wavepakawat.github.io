@@ -39,14 +39,10 @@ export function Loader({
       if (el) el.style.display = "none";
     };
 
-    // Second StrictMode mount (or already finished): the first run owns the
-    // intro — just make sure the app is unblocked and the cover is gone.
-    if (hasPlayed) {
-      onReady();
-      onReveal();
-      hide();
-      return;
-    }
+    // Second StrictMode mount: the first run already owns the whole intro
+    // (its gsap tweens keep animating the same DOM node). Do nothing here —
+    // hiding the cover now is what made the loader flash by.
+    if (hasPlayed) return;
     hasPlayed = true;
 
     if (prefersReduced()) {
