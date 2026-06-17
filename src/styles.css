@@ -1,0 +1,98 @@
+@import "tailwindcss";
+
+/* ============================================================
+   Design tokens — exposed to Tailwind as utilities
+   (e.g. bg-bg, text-muted, font-display, animate-float)
+   ============================================================ */
+@theme {
+  --color-bg: #0e0a1f;
+  --color-bgsoft: #15102e;
+  --color-ink: #f4f2ff;
+  --color-muted: #cbc6e6;
+  --color-faint: #9c95bf;
+
+  --color-purple: #8b5cf6;
+  --color-pink: #ff5eae;
+  --color-blue: #3b82f6;
+  --color-cyan: #22d3ee;
+  --color-orange: #ff9d4d;
+  --color-lime: #a3e635;
+
+  --font-sans: "Inter", "Noto Sans Thai", system-ui, sans-serif;
+  --font-display: "Sora", "Inter", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  --animate-float: float 22s ease-in-out infinite;
+  --animate-ringspin: ringspin 8s linear infinite;
+  --animate-scrolldot: scrolldot 1.6s ease-in-out infinite;
+
+  --radius-xl2: 20px;
+}
+
+@keyframes float {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33%      { transform: translate(4vw, 3vh) scale(1.1); }
+  66%      { transform: translate(-3vw, -2vh) scale(0.95); }
+}
+@keyframes ringspin { to { filter: hue-rotate(360deg); } }
+@keyframes scrolldot {
+  0%   { opacity: 0; transform: translate(-50%, 0); }
+  40%  { opacity: 1; }
+  80%  { opacity: 0; transform: translate(-50%, 14px); }
+  100% { opacity: 0; }
+}
+
+/* ---- Reusable gradient utilities (composable with bg-clip-text etc.) ---- */
+@utility grad-main {
+  background-image: linear-gradient(120deg, #8b5cf6 0%, #ff5eae 50%, #ff9d4d 100%);
+}
+@utility grad-cool {
+  background-image: linear-gradient(120deg, #22d3ee 0%, #3b82f6 50%, #8b5cf6 100%);
+}
+
+/* ============================================================
+   Base
+   ============================================================ */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 90px;
+  }
+  body {
+    background: var(--color-bg);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: 17px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+  h1, h2, h3 {
+    font-family: var(--font-display);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+  }
+
+  /* Thai needs more breathing room and no negative tracking */
+  html[lang="th"] body {
+    font-family: "Noto Sans Thai", "Inter", system-ui, sans-serif;
+    line-height: 1.95;
+    letter-spacing: 0;
+  }
+  html[lang="th"] h1,
+  html[lang="th"] h2,
+  html[lang="th"] h3 {
+    font-family: "Noto Sans Thai", "Sora", system-ui, sans-serif;
+    letter-spacing: 0;
+    line-height: 1.3;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation: none !important;
+      transition: none !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
