@@ -74,27 +74,50 @@ export function Work() {
       >
         {PROJECTS.map((p, i) => {
           const Icon = ICONS[p.icon];
+          const num = String(i + 1).padStart(2, "0");
           return (
             <article
               key={i}
-              data-cursor
-              className={`flex shrink-0 flex-col justify-between rounded-2xl border border-line bg-bg2 p-7 transition-colors hover:border-accent ${
-                horizontal ? "h-[64vh] w-[78vw] lg:w-[44vw]" : "w-full"
+              className={`group relative flex shrink-0 flex-col overflow-hidden rounded-2xl border border-line bg-bg2 p-7 transition-colors hover:border-accent ${
+                horizontal ? "h-[64vh] w-[78vw] lg:w-[46vw]" : "w-full"
               }`}
             >
-              <div className="flex items-start justify-between">
-                <span className="font-mono text-sm text-muted">
-                  {String(i + 1).padStart(2, "0")} / 0{PROJECTS.length}
+              {/* ghost index — fills the space a screenshot would, on purpose */}
+              <span
+                aria-hidden="true"
+                className="pointer-events-none absolute -right-4 -top-10 select-none font-display text-[12rem] font-bold leading-none text-line/60 sm:text-[16rem]"
+              >
+                {num}
+              </span>
+
+              {/* top: icon + category */}
+              <div className="relative flex items-center justify-between">
+                <span className="grid h-12 w-12 place-items-center rounded-xl border border-line text-accent">
+                  <Icon size={24} strokeWidth={1.8} />
                 </span>
-                <span className="text-accent">
-                  <Icon size={28} strokeWidth={1.8} />
+                <span className="font-mono text-[0.7rem] uppercase tracking-[0.16em] text-muted">
+                  {tr(p.type)}
                 </span>
               </div>
-              <div className="mt-10">
-                <h3 className="text-[clamp(1.8rem,4vw,3rem)] font-bold leading-[0.98]">
+
+              {/* bottom: title + description + metadata + stack */}
+              <div className="relative mt-auto pt-12">
+                <h3 className="text-[clamp(1.8rem,4vw,2.8rem)] font-bold leading-[0.98]">
                   {tr(p.title)}
                 </h3>
                 <p className="mb-6 mt-4 max-w-md text-muted">{tr(p.desc)}</p>
+
+                <dl className="mb-6 grid grid-cols-2 gap-x-6 gap-y-3 border-t border-line pt-5 font-mono text-sm">
+                  <div>
+                    <dt className="text-[0.7rem] uppercase tracking-[0.14em] text-faint">Platform</dt>
+                    <dd className="mt-0.5 text-ink">{p.platform}</dd>
+                  </div>
+                  <div>
+                    <dt className="text-[0.7rem] uppercase tracking-[0.14em] text-faint">Year</dt>
+                    <dd className="mt-0.5 text-ink">{p.year}</dd>
+                  </div>
+                </dl>
+
                 <Tags items={p.tags} />
               </div>
             </article>

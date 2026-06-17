@@ -184,17 +184,21 @@ export const EXPERIENCE: Job[] = [
 
 export type Project = {
   icon: "fuel" | "pin" | "chart" | "building";
-  accent: string;
   title: L;
   desc: L;
+  type: L;
+  platform: string;
+  year: string;
   tags: string[];
 };
 
 export const PROJECTS: Project[] = [
   {
     icon: "fuel",
-    accent: "var(--g-orange)",
     title: { en: "PT-Max Gas App", th: "แอป PT-Max Gas" },
+    type: { en: "Commerce · Consumer + Merchant", th: "อีคอมเมิร์ซ · ลูกค้า + ร้านค้า" },
+    platform: "iOS · Android",
+    year: "2022 — Now",
     desc: {
       en: "Consumer & merchant gas-cylinder sales platform. Shopping cart, discounts, referrals, payment gateway, EDC/NFC card reading, and live order mapping.",
       th: "แพลตฟอร์มจำหน่ายถังแก๊สทั้งฝั่งลูกค้าและร้านค้า ระบบตะกร้าสินค้า ส่วนลด เชิญเพื่อน ชำระเงิน อ่านบัตรผ่าน EDC/NFC และแสดงสถานะคำสั่งซื้อบนแผนที่",
@@ -203,8 +207,10 @@ export const PROJECTS: Project[] = [
   },
   {
     icon: "pin",
-    accent: "var(--g-cyan)",
     title: { en: "Time Attendance App", th: "แอปลงเวลาทำงาน" },
+    type: { en: "Workforce · HR", th: "HR · ลงเวลาทำงาน" },
+    platform: "iOS · Android",
+    year: "2021",
     desc: {
       en: "iOS & Android clock-in/out with GPS location tracking and on-map verification for accuracy before submitting.",
       th: "แอปลงเวลาเข้า-ออกงานบน iOS และ Android ระบุตำแหน่งด้วย GPS และยืนยันบนแผนที่เพื่อความแม่นยำก่อนส่งข้อมูล",
@@ -213,8 +219,10 @@ export const PROJECTS: Project[] = [
   },
   {
     icon: "chart",
-    accent: "var(--g-lime)",
     title: { en: "Water Level Tracking", th: "ติดตามระดับน้ำ" },
+    type: { en: "Government · Data Visualization", th: "ภาครัฐ · แสดงข้อมูล" },
+    platform: "iOS · Android",
+    year: "2023",
     desc: {
       en: "Royal Irrigation Department app visualizing water-level data through dynamic graphs and tables for fast, effective analysis.",
       th: "แอปของกรมชลประทาน แสดงผลข้อมูลระดับน้ำในรูปแบบกราฟและตารางแบบไดนามิก เพื่อการวิเคราะห์ที่รวดเร็วและมีประสิทธิภาพ",
@@ -223,8 +231,10 @@ export const PROJECTS: Project[] = [
   },
   {
     icon: "building",
-    accent: "var(--g-purple)",
     title: { en: "ERP / HRM & ESS Platform", th: "แพลตฟอร์ม ERP / HRM & ESS" },
+    type: { en: "Enterprise Platform", th: "แพลตฟอร์มองค์กร" },
+    platform: "Web",
+    year: "2020 — Now",
     desc: {
       en: "Enterprise resource & human-resource management with Next.js dashboards and an Employee Self-Service suite, backed by Golang & .NET APIs.",
       th: "ระบบบริหารทรัพยากรองค์กรและบุคคล พร้อมแดชบอร์ด Next.js และชุดฟีเจอร์ Employee Self-Service รองรับด้วย API ที่พัฒนาด้วย Golang และ .NET",
