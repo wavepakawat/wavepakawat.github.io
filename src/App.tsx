@@ -14,15 +14,16 @@ import { Contact } from "./components/Contact";
 
 export default function App() {
   const [ready, setReady] = useState(false);
+  const [reveal, setReveal] = useState(false);
   useSmoothScroll(ready);
 
   return (
     <ThemeProvider>
       <LangProvider>
-        <Loader onDone={() => setReady(true)} />
+        <Loader onReady={() => setReady(true)} onReveal={() => setReveal(true)} />
         <Nav />
         <main>
-          <Hero play={ready} />
+          <Hero play={reveal} />
           <Marquee />
           <About />
           <Work />

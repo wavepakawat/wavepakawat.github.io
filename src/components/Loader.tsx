@@ -1,46 +1,64 @@
 import { useEffect, useRef, useState } from "react";
 import { gsap, prefersReduced } from "../lib/motion";
 
-/** Intro counter (00 → 100) then a curtain wipe. Calls onDone when finished. */
-export function Loader({ onDone }: { onDone: () => void }) {
+/**
+ * Intro counter (00 → 100) then a curtain wipe.
+ * - onReady fires immediately so the app warms up (Lenis, ScrollTrigger)
+ *   behind the still-covered loader, keeping that work off the curtain frame.
+ * - onReveal fires as the curtain lifts, timing the hero reveal to the wipe.
+ */
+export function Loader({
+  onReady,
+  onReveal,
+}: {
+  onReady: () => void;
+  onReveal: () => void;
+}) {
   const root = useRef<HTMLDivElement>(null);
   const [count, setCount] = useState(0);
 
   useEffect(() => {
     if (prefersReduced()) {
-      onDone();
+      onReady();
+      onReveal();
       const el = root.current;
       if (el) el.style.display = "none";
       return;
     }
 
+    // Warm the app now, while the loader still fully covers the screen,
+    // so Lenis/ScrollTrigger setup never competes with the curtain wipe.
+    onReady();
+
     const obj = { v: 0 };
-    const tl = gsap.timeline({
-      onComplete: () => {
-        const el = root.current;
-        if (el) el.style.display = "none";
-      },
-    });
+    const tl = gsap.timeline();
 
     tl.to(obj, {
       v: 100,
-      duration: 1.6,
-      ease: "power2.inOut",
+      duration: 1.2,
+      ease: "power2.out",
       onUpdate: () => setCount(Math.round(obj.v)),
     });
-    tl.to(".loader__bar", { scaleX: 1, duration: 1.6, ease: "power2.inOut" }, 0);
-    tl.to(".loader__meta", { opacity: 0, duration: 0.3 }, ">-0.1");
-    tl.to(root.current, {
-      yPercent: -100,
-      duration: 0.8,
-      ease: "power4.inOut",
-      onStart: onDone,
-    });
+    tl.to(".loader__bar", { scaleX: 1, duration: 1.2, ease: "power2.out" }, 0);
+    tl.to(
+      root.current,
+      {
+        yPercent: -100,
+        duration: 0.75,
+        ease: "power4.inOut",
+        onStart: onReveal,
+        onComplete: () => {
+          const el = root.current;
+          if (el) el.style.display = "none";
+        },
+      },
+      ">+0.05",
+    );
 
     return () => {
       tl.kill();
     };
-  }, [onDone]);
+  }, [onReady, onReveal]);
 
   return (
     <div
