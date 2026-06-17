@@ -100,6 +100,16 @@
   animation: marquee 28s linear infinite;
 }
 
+/* Hero portrait — slow ambient ken-burns drift */
+@keyframes heroDrift {
+  from { transform: scale(1.04); }
+  to   { transform: scale(1.12); }
+}
+.hero-img {
+  transform: scale(1.04);
+  animation: heroDrift 24s ease-in-out infinite alternate;
+}
+
 /* Big fluid display sizes */
 @utility text-mega {
   font-size: clamp(3rem, 13vw, 11rem);
@@ -114,5 +124,6 @@
 
 @media (prefers-reduced-motion: reduce) {
   .marquee-track { animation: none !important; }
+  .hero-img { animation: none !important; transform: scale(1.04); }
   * { scroll-behavior: auto !important; }
 }
