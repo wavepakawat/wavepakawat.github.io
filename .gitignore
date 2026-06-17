@@ -1,0 +1,4 @@
+.venv-tmp/
+assets/_*.png
+assets/*.pdf.png
+.DS_Store
