@@ -4,94 +4,121 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 /* ============================================================
-   Theme tokens — light (default) and dark.
-   Exposed to Tailwind as utilities via @theme inline below
-   (e.g. bg-bg, text-ink, text-muted, border-border, text-accent).
+   "Engineered Motion" — tokens
+   Dark is the primary art direction; light is a clean inversion.
    ============================================================ */
 :root {
-  --bg: #ffffff;
-  --surface: #fafafa;
-  --elevated: #ffffff;
-  --ink: #18181b;
-  --muted: #52525b;
-  --faint: #a1a1aa;
-  --border: #e7e7ea;
-  --accent: #4f46e5;
+  --bg: #f3f3f0;
+  --bg2: #ffffff;
+  --ink: #0b0b0d;
+  --muted: #56564f;
+  --faint: #9a9a92;
+  --line: #d9d9d2;
+  --accent: #2233ff;
   --accent-ink: #ffffff;
-  --accent-soft: #eef2ff;
 }
 
 .dark {
-  --bg: #09090b;
-  --surface: #111113;
-  --elevated: #161618;
-  --ink: #fafafa;
-  --muted: #a1a1aa;
-  --faint: #71717a;
-  --border: #262629;
-  --accent: #818cf8;
-  --accent-ink: #0b0b12;
-  --accent-soft: #1c1b33;
+  --bg: #0a0a0b;
+  --bg2: #0f0f12;
+  --ink: #f3f3ef;
+  --muted: #8e8e88;
+  --faint: #57575c;
+  --line: #222227;
+  --accent: #4b63ff;
+  --accent-ink: #ffffff;
 }
 
 @theme inline {
   --color-bg: var(--bg);
-  --color-surface: var(--surface);
-  --color-elevated: var(--elevated);
+  --color-bg2: var(--bg2);
   --color-ink: var(--ink);
   --color-muted: var(--muted);
   --color-faint: var(--faint);
-  --color-border: var(--border);
+  --color-line: var(--line);
   --color-accent: var(--accent);
   --color-accent-ink: var(--accent-ink);
-  --color-accent-soft: var(--accent-soft);
 
-  --font-sans: "Inter", "Noto Sans Thai", system-ui, sans-serif;
-  --font-display: "Sora", "Inter", system-ui, sans-serif;
+  --font-display: "Bricolage Grotesque", "Noto Sans Thai", system-ui, sans-serif;
+  --font-body: "Inter", "Noto Sans Thai", system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
 }
 
 @layer base {
   html {
-    scroll-behavior: smooth;
-    scroll-padding-top: 88px;
+    scroll-behavior: auto; /* Lenis handles smoothing */
   }
   body {
     background: var(--bg);
     color: var(--ink);
-    font-family: var(--font-sans);
-    font-size: 17px;
-    line-height: 1.7;
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.6;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
     overflow-x: hidden;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    transition: background-color 0.4s ease, color 0.4s ease;
   }
-  h1, h2, h3 {
+  h1, h2, h3, h4 {
     font-family: var(--font-display);
-    line-height: 1.12;
-    letter-spacing: -0.025em;
+    font-weight: 700;
+    line-height: 0.95;
+    letter-spacing: -0.03em;
   }
 
-  /* Thai: more line height, neutral tracking */
-  html[lang="th"] body {
-    font-family: "Noto Sans Thai", "Inter", system-ui, sans-serif;
-    line-height: 1.95;
-    letter-spacing: 0;
-  }
+  html[lang="th"] body { font-family: "Noto Sans Thai", "Inter", sans-serif; line-height: 1.85; }
   html[lang="th"] h1,
   html[lang="th"] h2,
-  html[lang="th"] h3 {
-    font-family: "Noto Sans Thai", "Sora", system-ui, sans-serif;
-    letter-spacing: 0;
-    line-height: 1.32;
+  html[lang="th"] h3,
+  html[lang="th"] h4 {
+    font-family: "Noto Sans Thai", "Bricolage Grotesque", sans-serif;
+    letter-spacing: 0; line-height: 1.15;
   }
 
-  @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after {
-      animation: none !important;
-      transition: none !important;
-      scroll-behavior: auto !important;
-    }
+  /* hide native cursor on fine-pointer devices (custom cursor takes over) */
+  @media (hover: hover) and (pointer: fine) {
+    body { cursor: none; }
+    a, button { cursor: none; }
   }
+
+  ::selection { background: var(--accent); color: var(--accent-ink); }
+}
+
+/* ============================================================
+   Utilities
+   ============================================================ */
+
+/* Masked line reveal: wrap a line in .reveal-line; JS sets .is-in */
+@utility line-mask {
+  overflow: hidden;
+  display: block;
+}
+
+/* Marquee */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+@utility marquee-track {
+  display: inline-flex;
+  white-space: nowrap;
+  will-change: transform;
+  animation: marquee 28s linear infinite;
+}
+
+/* Big fluid display sizes */
+@utility text-mega {
+  font-size: clamp(3rem, 13vw, 11rem);
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+}
+@utility text-giant {
+  font-size: clamp(2.2rem, 7vw, 5.5rem);
+  line-height: 0.98;
+  letter-spacing: -0.03em;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track { animation: none !important; }
+  * { scroll-behavior: auto !important; }
 }

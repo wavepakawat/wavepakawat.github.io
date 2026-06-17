@@ -33,6 +33,8 @@ export const UI = {
     },
     cta: { en: "Get in touch", th: "ติดต่อผม" },
     resume: { en: "Download Résumé", th: "ดาวน์โหลดเรซูเม่" },
+    available: { en: "Available for work", th: "เปิดรับงาน" },
+    scroll: { en: "Scroll", th: "เลื่อนลง" },
   },
   about: {
     title: { en: "About me", th: "เกี่ยวกับฉัน" },
@@ -52,6 +54,10 @@ export const UI = {
   educationTitle: { en: "Education", th: "การศึกษา" },
   contact: {
     title: { en: "Let's work together", th: "มาร่วมงานกัน" },
+    big: {
+      en: "Let's build something worth shipping.",
+      th: "มาสร้างอะไรที่ส่งมอบได้จริงไปด้วยกัน",
+    },
     lead: {
       en: "Open to mobile & fullstack roles. The fastest way to reach me is email — I'll reply quickly.",
       th: "เปิดรับงานสาย Mobile & Fullstack ติดต่อผมได้เร็วที่สุดทางอีเมล แล้วผมจะรีบตอบกลับครับ",

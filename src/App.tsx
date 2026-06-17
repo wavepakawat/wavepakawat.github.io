@@ -1,30 +1,37 @@
+import { useState } from "react";
 import { ThemeProvider } from "./theme";
 import { LangProvider } from "./i18n";
+import { useSmoothScroll } from "./lib/motion";
+import { Loader } from "./components/Loader";
+import { Cursor } from "./components/Cursor";
 import { Nav } from "./components/Nav";
 import { Hero } from "./components/Hero";
+import { Marquee } from "./components/Marquee";
 import { About } from "./components/About";
-import { Skills } from "./components/Skills";
+import { Work } from "./components/Work";
 import { Experience } from "./components/Experience";
-import { Projects } from "./components/Projects";
 import { Education } from "./components/Education";
 import { Contact } from "./components/Contact";
-import { Footer } from "./components/Footer";
 
 export default function App() {
+  const [ready, setReady] = useState(false);
+  useSmoothScroll(ready);
+
   return (
     <ThemeProvider>
       <LangProvider>
+        <Loader onDone={() => setReady(true)} />
+        <Cursor />
         <Nav />
         <main>
-          <Hero />
+          <Hero play={ready} />
+          <Marquee />
           <About />
-          <Skills />
+          <Work />
           <Experience />
-          <Projects />
           <Education />
           <Contact />
         </main>
-        <Footer />
       </LangProvider>
     </ThemeProvider>
   );

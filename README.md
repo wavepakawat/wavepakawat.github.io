@@ -4,9 +4,12 @@ Personal portfolio / résumé site for **Pakawat Maleephet** — Mobile & Fullst
 
 🔗 **Live:** https://wavepakawat.github.io
 
-Built with **React 19 + TypeScript + Vite + Tailwind CSS v4**, icons from **lucide-react**.
-Minimal editorial design with a **light / dark theme toggle** (defaults to system),
-a bilingual **EN / TH** toggle, and a downloadable résumé.
+Built with **React 19 + TypeScript + Vite + Tailwind CSS v4**, icons from **lucide-react**,
+motion by **GSAP** + **Lenis**. An "Engineered Motion" design: intro counter loader,
+inertia smooth-scroll, magnetic custom cursor, kinetic masked-type hero, a stack marquee,
+and a horizontally-pinned "Selected Work" gallery. Includes a **light / dark theme toggle**
+(defaults to system), a bilingual **EN / TH** toggle, and a downloadable résumé.
+All motion respects `prefers-reduced-motion`.
 
 ## 🧰 Stack
 
@@ -15,6 +18,7 @@ a bilingual **EN / TH** toggle, and a downloadable résumé.
 | Framework | React 19 + TypeScript |
 | Build | Vite 8 |
 | Styling | Tailwind CSS v4 (`@tailwindcss/vite`) |
+| Motion | GSAP (ScrollTrigger) + Lenis smooth scroll |
 | Icons | lucide-react |
 | Package manager | Bun |
 | Deploy | GitHub Actions → GitHub Pages |
