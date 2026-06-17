@@ -32,16 +32,21 @@ export function Hero({ play }: { play: boolean }) {
       />
 
       {/* telemetry row */}
-      <div className="flex flex-wrap items-center justify-between gap-3 font-mono text-[0.7rem] uppercase tracking-[0.16em] text-white/75">
-        <span>{tr(PROFILE.role)}</span>
-        <span className="flex items-center gap-2">
-          <span className="relative flex h-2 w-2">
-            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-75" />
-            <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
-          </span>
-          {tr(UI.hero.available)}
+      <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-3">
+        <span className="flex items-center gap-3 font-mono text-sm font-semibold uppercase tracking-[0.18em] text-white sm:text-base">
+          <span className="h-4 w-1 rounded-full bg-accent" />
+          {tr(PROFILE.role)}
         </span>
-        <span>Bangkok, TH · 2026</span>
+        <div className="flex flex-wrap items-center gap-x-6 gap-y-2 font-mono text-[0.7rem] uppercase tracking-[0.16em] text-white/75">
+          <span className="flex items-center gap-2">
+            <span className="relative flex h-2 w-2">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-75" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
+            </span>
+            {tr(UI.hero.available)}
+          </span>
+          <span>Bangkok, TH · 2026</span>
+        </div>
       </div>
 
       {/* name — the signature */}
