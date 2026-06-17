@@ -112,6 +112,28 @@ export type Job = {
 
 export const EXPERIENCE: Job[] = [
   {
+    role: {
+      en: "Mobile & Backend Developer (Part-time)",
+      th: "นักพัฒนา Mobile & Backend (พาร์ทไทม์)",
+    },
+    company: { en: "Freelance / Contract", th: "ฟรีแลนซ์ / รับงานอิสระ" },
+    period: { en: "2022 — Present", th: "2022 — ปัจจุบัน" },
+    points: [
+      {
+        en: "PT-Max Gas (consumer): gas-cylinder sales app in React Native (Android/iOS) + C# .NET Core — cart, discounts, referrals, payment gateway, and order-status map.",
+        th: "PT-Max Gas (ฝั่งลูกค้า): แอปจำหน่ายถังแก๊สและอุปกรณ์เสริม พัฒนาด้วย React Native (Android/iOS) และ Backend C# .NET Core — ระบบตะกร้าสินค้า ส่วนลด เชิญเพื่อน ชำระเงิน และแสดงสถานะคำสั่งซื้อบนแผนที่",
+      },
+      {
+        en: "Gas sales (merchant): React Native (Android) + C# .NET Core integrated with EDC terminals to read membership & ID cards (NFC) — sales, tank-status monitoring, safety audits, and contract generation.",
+        th: "แอปจำหน่ายแก๊ส (ฝั่งร้านค้า): React Native (Android) + Backend C# .NET Core เชื่อมต่อเครื่อง EDC อ่านบัตรสมาชิกและบัตรประชาชน (NFC) เพื่อขายแก๊ส ตรวจสอบสถานะถัง เก็บข้อมูลตรวจสภาพถัง และสร้างสัญญายืมถัง",
+      },
+      {
+        en: "Water Level Tracking (Royal Irrigation Dept): React Native app visualizing water-level data through dynamic graphs and tables.",
+        th: "แอปติดตามระดับน้ำ กรมชลประทาน: พัฒนาด้วย React Native เน้นแสดงผลข้อมูลแบบกราฟและตารางเพื่อวิเคราะห์ได้ง่าย",
+      },
+    ],
+  },
+  {
     role: { en: "Software Engineer", th: "วิศวกรซอฟต์แวร์" },
     company: { en: "E-Business Plus Co., Ltd.", th: "บริษัท อี-บิซิเนส พลัส จำกัด" },
     period: { en: "2020 — 2026", th: "2020 — 2026" },
@@ -138,28 +160,7 @@ export const EXPERIENCE: Job[] = [
       },
     ],
   },
-  {
-    role: {
-      en: "Mobile & Backend Developer (Part-time)",
-      th: "นักพัฒนา Mobile & Backend (พาร์ทไทม์)",
-    },
-    company: { en: "Freelance / Contract", th: "ฟรีแลนซ์ / รับงานอิสระ" },
-    period: { en: "2022 — Present", th: "2022 — ปัจจุบัน" },
-    points: [
-      {
-        en: "PT-Max Gas (consumer): gas-cylinder sales app in React Native (Android/iOS) + C# .NET Core — cart, discounts, referrals, payment gateway, and order-status map.",
-        th: "PT-Max Gas (ฝั่งลูกค้า): แอปจำหน่ายถังแก๊สและอุปกรณ์เสริม พัฒนาด้วย React Native (Android/iOS) และ Backend C# .NET Core — ระบบตะกร้าสินค้า ส่วนลด เชิญเพื่อน ชำระเงิน และแสดงสถานะคำสั่งซื้อบนแผนที่",
-      },
-      {
-        en: "Gas sales (merchant): React Native (Android) + C# .NET Core integrated with EDC terminals to read membership & ID cards (NFC) — sales, tank-status monitoring, safety audits, and contract generation.",
-        th: "แอปจำหน่ายแก๊ส (ฝั่งร้านค้า): React Native (Android) + Backend C# .NET Core เชื่อมต่อเครื่อง EDC อ่านบัตรสมาชิกและบัตรประชาชน (NFC) เพื่อขายแก๊ส ตรวจสอบสถานะถัง เก็บข้อมูลตรวจสภาพถัง และสร้างสัญญายืมถัง",
-      },
-      {
-        en: "Water Level Tracking (Royal Irrigation Dept): React Native app visualizing water-level data through dynamic graphs and tables.",
-        th: "แอปติดตามระดับน้ำ กรมชลประทาน: พัฒนาด้วย React Native เน้นแสดงผลข้อมูลแบบกราฟและตารางเพื่อวิเคราะห์ได้ง่าย",
-      },
-    ],
-  },
+  
   {
     role: {
       en: "IT Support & Programmer (Internship)",

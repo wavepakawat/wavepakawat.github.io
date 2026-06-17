@@ -17,30 +17,15 @@ export function Experience() {
         className="text-giant mt-6 block font-bold"
       />
 
-      <div className="relative mt-16">
-        {/* timeline rail */}
-        <span
-          aria-hidden="true"
-          className="absolute left-[7px] top-3 bottom-3 w-px bg-line"
-        />
-        <div className="flex flex-col gap-14">
-          {EXPERIENCE.map((job, i) => (
-            <Reveal key={i}>
-              <article className="group relative pl-10">
-                {/* node */}
-                <span
-                  aria-hidden="true"
-                  className="absolute left-0 top-1 grid h-3.5 w-3.5 place-items-center rounded-full border border-line bg-bg transition-colors group-hover:border-accent"
-                >
-                  <span className="h-1.5 w-1.5 rounded-full bg-accent" />
-                </span>
-
-                <div className="font-mono text-xs uppercase tracking-[0.16em] text-accent">
-                  {tr(job.period)}
-                </div>
-                <div className="mt-3 flex flex-wrap items-baseline justify-between gap-2">
+      <div className="mt-16 flex flex-col">
+        {EXPERIENCE.map((job, i) => (
+          <Reveal key={i}>
+            <article className="group grid gap-x-10 gap-y-4 border-t border-line py-10 transition-colors last:border-b hover:bg-bg2 sm:grid-cols-[160px_1fr] sm:px-2">
+              <div className="font-mono text-sm text-muted">{tr(job.period)}</div>
+              <div>
+                <div className="flex flex-wrap items-baseline justify-between gap-2">
                   <h3 className="text-2xl font-bold sm:text-3xl">{tr(job.role)}</h3>
-                  <span className="font-mono text-sm text-muted">{tr(job.company)}</span>
+                  <span className="font-mono text-sm text-accent">{tr(job.company)}</span>
                 </div>
                 <ul className="mt-5 flex flex-col gap-2.5">
                   {job.points.map((p, j) => (
@@ -50,10 +35,10 @@ export function Experience() {
                     </li>
                   ))}
                 </ul>
-              </article>
-            </Reveal>
-          ))}
-        </div>
+              </div>
+            </article>
+          </Reveal>
+        ))}
       </div>
     </section>
   );
