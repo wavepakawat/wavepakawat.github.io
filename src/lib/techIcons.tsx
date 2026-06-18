@@ -1,25 +1,6 @@
 import type { ComponentType } from "react";
-import {
-  SiReact,
-  SiNextdotjs,
-  SiTailwindcss,
-  SiGo,
-  SiDotnet,
-  SiMongodb,
-  SiPostgresql,
-  SiMariadb,
-  SiSqlite,
-  SiDocker,
-  SiGit,
-  SiFigma,
-  SiGooglegemini,
-  SiGithubcopilot,
-  SiClaude,
-  SiOpenai,
-  
-} from "react-icons/si";
-import {SlCursor} from "react-icons/sl"
-import { Database, Webhook } from "lucide-react";
+import { SiMariadb, SiGithubcopilot } from "react-icons/si";
+import { Webhook } from "lucide-react";
 
 type IconType = ComponentType<{
   size?: number | string;
@@ -27,34 +8,48 @@ type IconType = ComponentType<{
   className?: string;
 }>;
 
-// `color` set => brand color; omitted => inherits currentColor (text-ink),
-// used for monochrome/dark-navy brands that would vanish in one theme.
+/**
+ * Brand logos for tech tags.
+ * - `src`  => devicon SVG (true brand colors), served from /public. `invert`
+ *            flips monochrome marks (e.g. Next.js) so they stay visible on dark.
+ * - `Icon` => react-icons fallback for logos devicon doesn't ship usable; when
+ *            `color` is omitted it inherits currentColor (text-ink) and adapts
+ *            to the theme.
+ */
 interface TechIcon {
-  Icon: IconType;
+  src?: string;
+  invert?: boolean;
+  Icon?: IconType;
   color?: string;
 }
 
+// devicon path → /public/icons/devicon/<file>
+const dev = (file: string): string => `icons/devicon/${file}`;
+
 export const TECH: Record<string, TechIcon> = {
-  "React Native (CLI & Expo)": { Icon: SiReact, color: "#61DAFB" },
-  "React Native": { Icon: SiReact, color: "#61DAFB" },
-  "React.js": { Icon: SiReact, color: "#61DAFB" },
-  "Next.js": { Icon: SiNextdotjs },
-  "Tailwind CSS": { Icon: SiTailwindcss, color: "#06B6D4" },
-  Golang: { Icon: SiGo, color: "#00ADD8" },
-  "C# .NET Core": { Icon: SiDotnet, color: "#7B5BD6" },
-  ".NET": { Icon: SiDotnet, color: "#7B5BD6" },
+  "React Native (CLI & Expo)": { src: dev("react-original.svg") },
+  "React Native": { src: dev("react-original.svg") },
+  "React.js": { src: dev("react-original.svg") },
+  TypeScript: { src: dev("typescript-original.svg") },
+  JavaScript: { src: dev("javascript-original.svg") },
+  "Next.js": { src: dev("nextjs-original.svg"), invert: true },
+  "Tailwind CSS": { src: dev("tailwindcss-original.svg") },
+  Golang: { src: dev("go-original.svg") },
+  "C# .NET Core": { src: dev("dotnetcore-original.svg") },
   "REST API": { Icon: Webhook },
-  "SQL Server": { Icon: Database, color: "#CC2927" },
-  MongoDB: { Icon: SiMongodb, color: "#47A248" },
-  PostgreSQL: { Icon: SiPostgresql, color: "#4169E1" },
+  "SQL Server": { src: dev("microsoftsqlserver-original.svg") },
+  MongoDB: { src: dev("mongodb-original.svg") },
+  PostgreSQL: { src: dev("postgresql-original.svg") },
+  // devicon ships MariaDB as a single dark teal that vanishes on the dark
+  // theme, so keep the adaptive monochrome mark.
   MariaDB: { Icon: SiMariadb },
-  SQLite: { Icon: SiSqlite },
-  Docker: { Icon: SiDocker, color: "#2496ED" },
-  Git: { Icon: SiGit, color: "#F05032" },
-  Figma: { Icon: SiFigma, color: "#F24E1E" },
-  "Claude Code": { Icon: SiClaude, color: "#D97757" },
-  Cursor: { Icon: SlCursor },
-  Codex: { Icon: SiOpenai },
+  SQLite: { src: dev("sqlite-original.svg") },
+  Docker: { src: dev("docker-original.svg") },
+  Git: { src: dev("git-original.svg") },
+  Figma: { src: dev("figma-original.svg") },
+  "Claude Code": { src: dev("claude-ai-symbol.svg") },
+  Cursor: { src: dev("cursor-ai-code-icon.svg"), invert: true },
+  Codex: { src: dev("codex-color.svg") },
   "GitHub Copilot": { Icon: SiGithubcopilot },
-  "Gemini API": { Icon: SiGooglegemini, color: "#8E75B2" },
+  "Gemini API": { src: dev("google-gemini.svg") },
 };

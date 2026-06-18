@@ -25,13 +25,20 @@ export function Marquee() {
           return (
             <span key={i} className="flex items-center">
               <span className="flex items-center gap-4 px-7 text-giant font-semibold">
-                {tech && (
+                {tech?.src ? (
+                  <img
+                    src={`${import.meta.env.BASE_URL}${tech.src}`}
+                    alt=""
+                    aria-hidden="true"
+                    className={`h-[0.78em] w-[0.78em] shrink-0 ${tech.invert ? "dark:invert" : ""}`}
+                  />
+                ) : tech?.Icon ? (
                   <tech.Icon
                     size="0.78em"
                     color={tech.color}
                     className={tech.color ? "" : "text-ink"}
                   />
-                )}
+                ) : null}
                 {s}
               </span>
               <span className="text-accent">✦</span>

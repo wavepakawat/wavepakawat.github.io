@@ -38,9 +38,13 @@ export const UI = {
   },
   about: {
     title: { en: "About me", th: "เกี่ยวกับฉัน" },
-    lead: {
-      en: "Highly agile developer specialized in React Native, Golang, and SQL Server. I've shipped full-cycle applications across mobile and web — designing intuitive frontend interfaces and engineering robust, scalable backend systems.",
-      th: "นักพัฒนาที่มีความคล่องตัวสูง เชี่ยวชาญด้าน React Native, Golang และ SQL Server มีประสบการณ์ส่งมอบแอปพลิเคชันแบบครบวงจรทั้งบนมือถือและเว็บ — ออกแบบหน้าจอที่ใช้งานง่าย และพัฒนาระบบหลังบ้านที่แข็งแกร่งและขยายต่อได้",
+    headline: {
+      en: "Highly agile developer specialized in React Native, Golang & SQL Server.",
+      th: "นักพัฒนาที่คล่องตัวสูง เชี่ยวชาญ React Native, Golang และ SQL Server",
+    },
+    body: {
+      en: "I've shipped full-cycle applications across mobile and web — designing intuitive frontend interfaces and engineering robust, scalable backend systems.",
+      th: "ส่งมอบแอปพลิเคชันแบบครบวงจรทั้งบนมือถือและเว็บ ออกแบบหน้าจอที่ใช้งานง่าย และพัฒนาระบบหลังบ้านที่แข็งแกร่งและขยายต่อได้",
     },
     facts: [
       { num: "5+", label: { en: "Years building apps", th: "ปีในการพัฒนาแอป" } },
@@ -84,7 +88,7 @@ export const SKILLS: SkillGroup[] = [
   {
     key: "mobile",
     title: { en: "Mobile & Frontend", th: "มือถือ & ฟรอนต์เอนด์" },
-    tags: ["React Native (CLI & Expo)", "React.js", "Next.js", "Tailwind CSS"],
+    tags: ["React Native (CLI & Expo)", "React.js", "Next.js", "TypeScript", "JavaScript", "Tailwind CSS"],
   },
   {
     key: "backend",
