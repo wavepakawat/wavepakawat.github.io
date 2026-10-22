@@ -128,8 +128,12 @@ export const EXPERIENCE: Job[] = [
         th: "PT-Max Gas (ฝั่งลูกค้า): แอปจำหน่ายถังแก๊สและอุปกรณ์เสริม พัฒนาด้วย React Native (Android/iOS) และ Backend C# .NET Core — ระบบตะกร้าสินค้า ส่วนลด เชิญเพื่อน ชำระเงิน และแสดงสถานะคำสั่งซื้อบนแผนที่",
       },
       {
-        en: "Gas sales (merchant): React Native (Android) + C# .NET Core integrated with EDC terminals to read membership & ID cards (NFC) — sales, tank-status monitoring, safety audits, and contract generation.",
-        th: "แอปจำหน่ายแก๊ส (ฝั่งร้านค้า): React Native (Android) + Backend C# .NET Core เชื่อมต่อเครื่อง EDC อ่านบัตรสมาชิกและบัตรประชาชน (NFC) เพื่อขายแก๊ส ตรวจสอบสถานะถัง เก็บข้อมูลตรวจสภาพถัง และสร้างสัญญายืมถัง",
+        en: "Gas sales (merchant): React Native (Android) + C# .NET Core integrated with EDC terminals to read membership & ID cards (NFC) and thermal printers for receipt slips — sales, tank-status monitoring, safety audits, and contract generation.",
+        th: "แอปจำหน่ายแก๊ส (ฝั่งร้านค้า): React Native (Android) + Backend C# .NET Core เชื่อมต่อเครื่อง EDC อ่านบัตรสมาชิกและบัตรประชาชน (NFC) และเครื่องพิมพ์ Thermal สำหรับพิมพ์สลิป เพื่อขายแก๊ส ตรวจสอบสถานะถัง เก็บข้อมูลตรวจสภาพถัง และสร้างสัญญายืมถัง",
+      },
+      {
+        en: "Gas Cylinder Tracking System: React Native + C# .NET Core app that tracks every cylinder by QR scan at each handoff — pre-filling, truck loading, unloading, branch receiving, and return to the filling plant — to prevent fraud.",
+        th: "Gas Cylinder Tracking System: แอป React Native + Backend C# .NET Core ติดตามถังแก๊สด้วยการสแกน QR Code ทุกจุดที่ทำรายการ ตั้งแต่ก่อนอัดบรรจุ นำขึ้นรถ ลงรถ รับเข้าสาขา และโอนกลับโรงบรรจุ เพื่อป้องกันการทุจริต",
       },
       {
         en: "Water Level Tracking (Royal Irrigation Dept): React Native app visualizing water-level data through dynamic graphs and tables.",
